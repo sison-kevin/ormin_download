@@ -71,11 +71,11 @@ export default function CTA() {
     <section
       ref={sectionRef}
       id="download"
-      className="w-full bg-white"
+      className="w-full max-w-full overflow-hidden bg-white"
     >
       <div
         className={
-          "relative w-full overflow-hidden " +
+        "relative w-full overflow-hidden " +
           "bg-gradient-to-br from-green-900 via-green-800 to-green-700 " +
           "py-20 sm:py-24 md:py-28 " +
           "transition-opacity duration-1000 " +

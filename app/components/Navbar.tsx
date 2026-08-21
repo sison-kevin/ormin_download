@@ -1,11 +1,18 @@
 "use client";
 
-import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
+
+  /*
+   * ==========================================
+   * SHOW / HIDE NAVBAR BASED ON HERO
+   * ==========================================
+   */
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,17 +22,34 @@ export default function Navbar() {
 
       const rect = hero.getBoundingClientRect();
 
-      const heroActive =
-        rect.top <= 0 &&
+      /*
+       * The navbar is visible while the Hero
+       * section is still visible.
+       *
+       * Once the Hero completely leaves the
+       * viewport, hide the navbar.
+       */
+
+      const heroIsVisible =
+        rect.top < window.innerHeight &&
         rect.bottom > 0;
 
-      setShowNavbar(heroActive);
+      setShowNavbar(heroIsVisible);
+
+      /*
+       * Close mobile menu when leaving Hero.
+       */
+
+      if (!heroIsVisible) {
+        setIsOpen(false);
+      }
     };
 
     window.addEventListener("scroll", handleScroll, {
       passive: true,
     });
 
+    // Run once when the page loads
     handleScroll();
 
     return () => {
@@ -33,413 +57,475 @@ export default function Navbar() {
     };
   }, []);
 
-  /*
-   * ==========================================
-   * SMOOTH SCROLL
-   * ==========================================
-   */
-
-  const scrollToSection = (sectionId: string) => {
-    const section = document.getElementById(sectionId);
-
-    if (!section) return;
-
-    const navbarOffset = 20;
-
-    const sectionPosition =
-      section.getBoundingClientRect().top +
-      window.scrollY -
-      navbarOffset;
-
-    window.scrollTo({
-      top: sectionPosition,
-      behavior: "smooth",
-    });
-
-    // Close mobile menu
-    setMenuOpen(false);
-  };
-
   return (
-    <nav
+    <header
       className={`
-        fixed left-1/2 top-5 z-[9999]
-        w-[92%] max-w-6xl
+        fixed
+        left-1/2
+        top-4
+        z-[9999]
+
+        w-[calc(100%-1rem)]
+        max-w-5xl
+
         -translate-x-1/2
-        transition-all duration-300
+
+        transition-all
+        duration-500
+        ease-out
+
         ${
           showNavbar
             ? "translate-y-0 opacity-100"
-            : "-translate-y-10 pointer-events-none opacity-0"
+            : "-translate-y-8 pointer-events-none opacity-0"
         }
       `}
     >
-      {/* =========================
+      {/* ==================================================
           GLASS NAVBAR
-      ========================= */}
+      ================================================== */}
 
       <div
         className="
+          relative
+
+          flex
+          items-center
+          justify-between
+
           rounded-full
-          border border-white/20
+
+          border
+          border-white/20
+
           bg-white/10
-          px-5 py-3
-          shadow-lg
+
+          px-4
+          py-2.5
+
+          shadow-[0_8px_32px_rgba(0,0,0,0.18)]
+
           backdrop-blur-xl
+          backdrop-saturate-150
+
+          sm:px-5
         "
       >
-        <div className="flex items-center justify-between">
+        {/* ==================================================
+            BRAND
+        ================================================== */}
 
-          {/* =========================
-              LOGO
-          ========================= */}
+        <Link
+          href="#home"
+          onClick={() => setIsOpen(false)}
+          className="
+            flex
+            shrink-0
+            items-center
+            gap-2
 
-          <button
-            type="button"
-            onClick={() => scrollToSection("home")}
-            className="
-              flex items-center gap-2
-              cursor-pointer
-              transition-all duration-200
-              hover:opacity-90
-              active:scale-95
-            "
-          >
-            <div
-              className="
-                flex h-9 w-9
-                items-center justify-center
-                rounded-full
-                bg-green-700
-                text-sm font-bold
-                text-white
-                shadow-md
-                transition-all duration-200
-                active:scale-90
-              "
-            >
-              eO
-            </div>
+            transition
+            duration-200
 
-            <span className="text-sm font-semibold sm:text-base">
-                <span className="text-emerald-500">e</span>
-                <span className="text-white">Ormin</span>{" "}
-                <span className="text-[#C49A6C]">Heritage</span>
-            </span>
-          </button>
-
-          {/* =========================
-              DESKTOP NAVIGATION
-          ========================= */}
+            hover:opacity-90
+          "
+        >
+          {/* Logo */}
 
           <div
             className="
-              hidden
+              flex
+              h-8
+              w-8
+              shrink-0
+
               items-center
-              gap-7
-              md:flex
+              justify-center
+
+              rounded-full
+
+              border
+              border-white/10
+
+              bg-emerald-600
+
+              text-xs
+              font-bold
+              text-white
+
+              shadow-md
             "
           >
-
-            {/* HOME */}
-
-            <button
-              type="button"
-              onClick={() => scrollToSection("home")}
-              className="
-                cursor-pointer
-                rounded-full
-                px-3 py-2
-                text-sm
-                text-white/90
-                transition-all duration-200
-                hover:bg-white/10
-                hover:text-white
-                active:scale-95
-                active:bg-white/20
-              "
-            >
-              Home
-            </button>
-
-            {/* FEATURES */}
-
-            <button
-              type="button"
-              onClick={() => scrollToSection("features")}
-              className="
-                cursor-pointer
-                rounded-full
-                px-3 py-2
-                text-sm
-                text-white/90
-                transition-all duration-200
-                hover:bg-white/10
-                hover:text-white
-                active:scale-95
-                active:bg-white/20
-              "
-            >
-              Features
-            </button>
-
-            {/* HOW IT WORKS */}
-
-            <button
-              type="button"
-              onClick={() =>
-                scrollToSection("how-it-works")
-              }
-              className="
-                cursor-pointer
-                rounded-full
-                px-3 py-2
-                text-sm
-                text-white/90
-                transition-all duration-200
-                hover:bg-white/10
-                hover:text-white
-                active:scale-95
-                active:bg-white/20
-              "
-            >
-              How It Works
-            </button>
-
-            {/* EXPLORE */}
-
-            <button
-              type="button"
-              onClick={() =>
-                scrollToSection("explore")
-              }
-              className="
-                cursor-pointer
-                rounded-full
-                px-3 py-2
-                text-sm
-                text-white/90
-                transition-all duration-200
-                hover:bg-white/10
-                hover:text-white
-                active:scale-95
-                active:bg-white/20
-              "
-            >
-              Explore
-            </button>
-
+            eO
           </div>
 
-          {/* =========================
-              GET THE APP
-          ========================= */}
+          {/* Brand Name */}
 
-          <button
-            type="button"
-            onClick={() =>
-              scrollToSection("download")
-            }
+          <span
             className="
-              hidden
-              cursor-pointer
+              text-sm
+              font-bold
+              tracking-tight
+              text-white
+
+              sm:text-base
+            "
+          >
+            <span className="text-emerald-400">
+              e
+            </span>
+
+            <span className="text-white">
+              Ormin
+            </span>{" "}
+
+            <span className="text-[#d6c2aa]">
+              Heritage
+            </span>
+          </span>
+        </Link>
+
+        {/* ==================================================
+            DESKTOP NAVIGATION
+        ================================================== */}
+
+        <nav
+          className="
+            hidden
+
+            items-center
+            gap-5
+
+            text-xs
+            font-medium
+            text-white/80
+
+            md:flex
+            lg:gap-7
+            lg:text-sm
+          "
+        >
+          {/* Home */}
+
+          <Link
+            href="#home"
+            className="
               rounded-full
-              bg-white/90
-              px-5 py-2.5
-              text-sm font-medium
-              text-green-900
+              px-2
+              py-1.5
+
+              transition
+              duration-200
+
+              hover:bg-white/10
+              hover:text-white
+            "
+          >
+            Home
+          </Link>
+
+          {/* Features */}
+
+          <Link
+            href="#features"
+            className="
+              rounded-full
+              px-2
+              py-1.5
+
+              transition
+              duration-200
+
+              hover:bg-white/10
+              hover:text-white
+            "
+          >
+            Features
+          </Link>
+
+          {/* How It Works */}
+
+          <Link
+            href="#how-it-works"
+            className="
+              rounded-full
+              px-2
+              py-1.5
+
+              transition
+              duration-200
+
+              hover:bg-white/10
+              hover:text-white
+            "
+          >
+            How It Works
+          </Link>
+
+          {/* Explore */}
+
+          <Link
+            href="#explore"
+            className="
+              rounded-full
+              px-2
+              py-1.5
+
+              transition
+              duration-200
+
+              hover:bg-white/10
+              hover:text-white
+            "
+          >
+            Explore
+          </Link>
+        </nav>
+
+        {/* ==================================================
+            DESKTOP GET THE APP
+        ================================================== */}
+
+        <Link
+          href="#download"
+          className="
+            hidden
+
+            shrink-0
+
+            rounded-full
+
+            border
+            border-white/20
+
+            bg-white/90
+
+            px-4
+            py-2
+
+            text-xs
+            font-bold
+            text-gray-900
+
+            shadow-sm
+
+            transition-all
+            duration-200
+
+            hover:-translate-y-0.5
+            hover:bg-white
+            hover:shadow-lg
+
+            active:translate-y-0
+            active:scale-95
+
+            md:block
+          "
+        >
+          Get The App
+        </Link>
+
+        {/* ==================================================
+            MOBILE MENU BUTTON
+        ================================================== */}
+
+        <button
+          type="button"
+          onClick={() => setIsOpen(!isOpen)}
+          className="
+            flex
+            shrink-0
+
+            items-center
+            justify-center
+
+            rounded-full
+
+            p-2
+
+            text-white
+
+            transition-all
+            duration-200
+
+            hover:bg-white/10
+
+            active:scale-90
+
+            md:hidden
+          "
+          aria-label="Toggle Menu"
+          aria-expanded={isOpen}
+        >
+          {isOpen ? (
+            <X size={20} />
+          ) : (
+            <Menu size={20} />
+          )}
+        </button>
+      </div>
+
+      {/* ==================================================
+          MOBILE MENU
+      ================================================== */}
+
+      <div
+        className={`
+          mt-2
+
+          overflow-hidden
+
+          rounded-2xl
+
+          border
+          border-white/20
+
+          bg-black/50
+
+          shadow-[0_12px_40px_rgba(0,0,0,0.25)]
+
+          backdrop-blur-xl
+          backdrop-saturate-150
+
+          transition-all
+          duration-300
+
+          md:hidden
+
+          ${
+            isOpen
+              ? "max-h-[500px] translate-y-0 opacity-100"
+              : "pointer-events-none max-h-0 -translate-y-2 opacity-0"
+          }
+        `}
+      >
+        <nav
+          className="
+            flex
+            flex-col
+            gap-2
+
+            p-5
+
+            text-center
+            text-sm
+            font-medium
+            text-white
+          "
+        >
+          {/* Home */}
+
+          <Link
+            href="#home"
+            onClick={() => setIsOpen(false)}
+            className="
+              rounded-xl
+              px-3
+              py-2.5
+
+              transition
+
+              hover:bg-white/10
+              hover:text-emerald-400
+            "
+          >
+            Home
+          </Link>
+
+          {/* Features */}
+
+          <Link
+            href="#features"
+            onClick={() => setIsOpen(false)}
+            className="
+              rounded-xl
+              px-3
+              py-2.5
+
+              transition
+
+              hover:bg-white/10
+              hover:text-emerald-400
+            "
+          >
+            Features
+          </Link>
+
+          {/* How It Works */}
+
+          <Link
+            href="#how-it-works"
+            onClick={() => setIsOpen(false)}
+            className="
+              rounded-xl
+              px-3
+              py-2.5
+
+              transition
+
+              hover:bg-white/10
+              hover:text-emerald-400
+            "
+          >
+            How It Works
+          </Link>
+
+          {/* Explore */}
+
+          <Link
+            href="#explore"
+            onClick={() => setIsOpen(false)}
+            className="
+              rounded-xl
+              px-3
+              py-2.5
+
+              transition
+
+              hover:bg-white/10
+              hover:text-emerald-400
+            "
+          >
+            Explore
+          </Link>
+
+          {/* Get The App */}
+
+          <Link
+            href="#download"
+            onClick={() => setIsOpen(false)}
+            className="
+              mt-2
+
+              w-full
+
+              rounded-full
+
+              bg-white
+
+              py-3
+
+              text-center
+
+              text-sm
+              font-bold
+              text-gray-900
+
               shadow-md
+
               transition-all
               duration-200
-              hover:scale-105
-              hover:bg-white
+
+              hover:bg-emerald-50
               hover:shadow-lg
+
               active:scale-95
-              active:bg-green-50
-              md:block
             "
           >
             Get The App
-          </button>
-
-          {/* =========================
-              MOBILE MENU BUTTON
-          ========================= */}
-
-          <button
-            type="button"
-            onClick={() =>
-              setMenuOpen(!menuOpen)
-            }
-            className="
-              cursor-pointer
-              rounded-full
-              p-2
-              text-white
-              transition-all
-              duration-200
-              hover:bg-white/10
-              active:scale-90
-              active:bg-white/20
-              md:hidden
-            "
-            aria-label="Toggle menu"
-          >
-            {menuOpen ? (
-              <X size={22} />
-            ) : (
-              <Menu size={22} />
-            )}
-          </button>
-
-        </div>
-
-        {/* =========================
-            MOBILE MENU
-        ========================= */}
-
-        {menuOpen && (
-          <div
-            className="
-              mt-4
-              flex flex-col
-              gap-2
-              border-t
-              border-white/20
-              pt-4
-              md:hidden
-            "
-          >
-
-            {/* HOME */}
-
-            <button
-              type="button"
-              onClick={() =>
-                scrollToSection("home")
-              }
-              className="
-                cursor-pointer
-                rounded-xl
-                px-3 py-2
-                text-left
-                text-sm
-                text-white
-                transition-all duration-200
-                hover:bg-white/10
-                hover:text-green-200
-                active:scale-[0.98]
-                active:bg-white/20
-              "
-            >
-              Home
-            </button>
-
-            {/* FEATURES */}
-
-            <button
-              type="button"
-              onClick={() =>
-                scrollToSection("features")
-              }
-              className="
-                cursor-pointer
-                rounded-xl
-                px-3 py-2
-                text-left
-                text-sm
-                text-white
-                transition-all duration-200
-                hover:bg-white/10
-                hover:text-green-200
-                active:scale-[0.98]
-                active:bg-white/20
-              "
-            >
-              Features
-            </button>
-
-            {/* HOW IT WORKS */}
-
-            <button
-              type="button"
-              onClick={() =>
-                scrollToSection("how-it-works")
-              }
-              className="
-                cursor-pointer
-                rounded-xl
-                px-3 py-2
-                text-left
-                text-sm
-                text-white
-                transition-all duration-200
-                hover:bg-white/10
-                hover:text-green-200
-                active:scale-[0.98]
-                active:bg-white/20
-              "
-            >
-              How It Works
-            </button>
-
-            {/* EXPLORE */}
-
-            <button
-              type="button"
-              onClick={() =>
-                scrollToSection("explore")
-              }
-              className="
-                cursor-pointer
-                rounded-xl
-                px-3 py-2
-                text-left
-                text-sm
-                text-white
-                transition-all duration-200
-                hover:bg-white/10
-                hover:text-green-200
-                active:scale-[0.98]
-                active:bg-white/20
-              "
-            >
-              Explore
-            </button>
-
-            {/* GET THE APP */}
-
-            <button
-              type="button"
-              onClick={() =>
-                scrollToSection("download")
-              }
-              className="
-                mt-2
-                cursor-pointer
-                rounded-full
-                bg-white/90
-                px-5 py-3
-                text-center
-                text-sm font-medium
-                text-green-900
-                shadow-md
-                transition-all
-                duration-200
-                hover:scale-[1.02]
-                hover:bg-white
-                hover:shadow-lg
-                active:scale-95
-                active:bg-green-50
-              "
-            >
-              Get The App
-            </button>
-
-          </div>
-        )}
-
+          </Link>
+        </nav>
       </div>
-    </nav>
+    </header>
   );
 }

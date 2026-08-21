@@ -135,7 +135,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative h-[380vh] bg-[#d6c2aa]"
+      className="relative h-[400vh] bg-[#d6c2aa]"
     >
       {/* Sticky Hero */}
       <div className="sticky top-0 z-0 h-screen overflow-hidden">
