@@ -1,6 +1,32 @@
 "use client";
 
+import {
+  Cinzel_Decorative,
+  Inter,
+  Noto_Sans_Hanunoo,
+} from "next/font/google";
 import { useEffect, useRef, useState } from "react";
+
+/* ==================================================
+   FONTS
+   ================================================== */
+
+const cinzelDecorative = Cinzel_Decorative({
+  subsets: ["latin"],
+  weight: ["400", "700", "900"],
+  display: "swap",
+});
+
+const notoHanunoo = Noto_Sans_Hanunoo({
+  subsets: ["hanunoo"],
+  weight: ["400"],
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -15,7 +41,7 @@ export default function Hero() {
 
     if (!video) return;
 
-    // Start video at 0:00
+    // Always start video at 0:00
     video.pause();
     video.currentTime = 0;
 
@@ -28,28 +54,15 @@ export default function Hero() {
        * ==========================================
        */
 
-      // Animation starts at 3 seconds
       const animationStart = 3;
-
-      // Animation finishes at 4.5 seconds
       const animationEnd = 4.5;
 
       let progress =
         (video.currentTime - animationStart) /
         (animationEnd - animationStart);
 
-      // Keep progress between 0 and 1
-      progress = Math.min(
-        Math.max(progress, 0),
-        1
-      );
+      progress = Math.min(Math.max(progress, 0), 1);
 
-      /*
-       * Move the entire content upward.
-       *
-       * 0%   = normal position
-       * 100% = completely above the screen
-       */
       const translateY = progress * -100;
 
       setContentStyle({
@@ -71,27 +84,19 @@ export default function Hero() {
       if (!isHeroVisible) return;
 
       /*
-       * ==========================================
-       * VIDEO PLAYBACK
-       * ==========================================
+       * PLAY VIDEO WHILE SCROLLING
        */
 
-      // Play while scrolling
       if (video.paused) {
         video.play().catch(() => {});
       }
 
-      /*
-       * ==========================================
-       * UPDATE CONTENT
-       * ==========================================
-       */
-
       updateContentAnimation();
 
       /*
-       * Pause when scrolling stops
+       * PAUSE WHEN SCROLLING STOPS
        */
+
       if (scrollTimeout.current) {
         clearTimeout(scrollTimeout.current);
       }
@@ -101,9 +106,6 @@ export default function Hero() {
       }, 100);
     };
 
-    /*
-     * Update content whenever video time changes
-     */
     video.addEventListener(
       "timeupdate",
       updateContentAnimation
@@ -135,15 +137,27 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative h-[400vh] bg-[#d6c2aa]"
+      className="relative h-[400vh] bg-[#2B1B1E]"
     >
-      {/* Sticky Hero */}
+      {/* ==================================================
+          STICKY HERO
+          ================================================== */}
+
       <div className="sticky top-0 z-0 h-screen overflow-hidden">
 
-        {/* Background Video */}
+        {/* ==================================================
+            BACKGROUND VIDEO
+            ================================================== */}
+
         <video
           ref={videoRef}
-          className="absolute inset-0 h-full w-full object-cover"
+          className="
+            absolute
+            inset-0
+            h-full
+            w-full
+            object-cover
+          "
           muted
           playsInline
           preload="auto"
@@ -154,64 +168,199 @@ export default function Hero() {
           />
         </video>
 
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/30" />
+        {/* ==================================================
+            DARK OVERLAY
+            ================================================== */}
 
-        {/* Hero Content */}
-        <div className="relative z-10 flex min-h-screen items-center justify-center px-4">
+        <div
+          className="
+            absolute
+            inset-0
+            bg-black/40
+          "
+        />
 
+        {/* Warm heritage tint */}
+
+        <div
+          className="
+            pointer-events-none
+            absolute
+            inset-0
+            bg-[#3A2024]/20
+          "
+        />
+
+        {/* ==================================================
+            HERO CONTENT
+            ================================================== */}
+
+        <div
+          className="
+            relative
+            z-10
+            flex
+            min-h-screen
+            items-center
+            justify-center
+            px-5
+            sm:px-6
+          "
+        >
           <div
-            className="text-center text-white will-change-transform"
+            className="
+              w-full
+              max-w-5xl
+              text-center
+              text-white
+              will-change-transform
+            "
             style={{
               transform: contentStyle.transform,
             }}
           >
 
-            {/* Hero Title */}
-            <h1 className="text-4xl font-bold tracking-tight text-white drop-shadow-lg sm:text-6xl md:text-7xl">
-              Explore Heritage, Culture & <br />
+            {/* ==================================================
+                LABEL
+                ================================================== */}
 
-              <span className="mt-2 block font-extrabold text-[#E2B889] drop-shadow-md">
-                History Made Simple
-              </span>
-            </h1>
+          <div className="mb-0 leading-none">
+            <span
+              className={`
+                ${notoHanunoo.className}
+                inline-flex
+                items-center
+                justify-center
+                px-5
+                py-2.5
+                text-sm
+                text-[#E2B889]
 
-            {/* Description */}
-            <p className="mx-auto mt-6 max-w-2xl text-lg text-white/90 drop-shadow-sm">
+                sm:text-base
+                md:text-lg
+                lg:text-xl
+                xl:text-xl
+              `}
+            >
+              ᜠᜳᜍᜬᜨᜲᜈ᜔ ᜑᜒᜍᜒᜆᜊᜒ ᜋᜒᜐᜒᜌᜓᜋ᜔
+            </span>
+          </div>
+
+          {/* HERO TITLE */}
+
+          <h1
+            className={`
+              ${cinzelDecorative.className}
+              text-2xl
+              font-bold
+              leading-[1.15]
+              tracking-normal
+              text-white
+              drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)]
+
+              sm:text-4xl
+              md:text-5xl
+              lg:text-6xl
+              xl:text-7xl
+            `}
+          >
+            Explore Heritage,
+            <br />
+
+            <span
+              className="
+                text-[#E2B889]
+                drop-shadow-[0_4px_15px_rgba(0,0,0,0.5)]
+              "
+            >
+              Culture & History
+            </span>
+
+            <br />
+
+            <span className="text-white">
+              Made Simple
+            </span>
+          </h1>
+
+            {/* ==================================================
+                DESCRIPTION
+                INTER
+                ================================================== */}
+
+            <p
+              className={`
+                ${inter.className}
+                mx-auto
+                mt-4
+                max-w-xl
+                text-[10px]
+                leading-4
+                text-white/85
+                drop-shadow-md
+
+                sm:mt-5
+                sm:text-xs
+                sm:leading-5
+
+                md:mt-5
+                md:text-sm
+                md:leading-6
+
+                lg:text-base
+                lg:leading-6
+
+                xl:text-base
+                xl:leading-6
+              `}
+            >
               Discover the rich history and cultural heritage
-              of Oriental Mindoro.
+              of Oriental Mindoro through an interactive
+              digital museum experience.
             </p>
 
-            {/* Download Button */}
+            {/* ==================================================
+                DOWNLOAD BUTTON
+                ================================================== */}
+
            <button
-            className="
+              type="button"
+              className={`
+                ${inter.className}
                 group
                 relative
-                mt-8
+
+                mt-10
+                sm:mt-11
+                md:mt-12
+                lg:mt-14
+                xl:mt-16
+
                 inline-flex
                 items-center
                 gap-3
                 overflow-hidden
                 rounded-full
-                bg-green-700
+                bg-[#1F4D3A]
                 px-7
-                py-4
+                py-3.5
                 text-sm
                 font-semibold
                 text-white
-                shadow-[0_10px_30px_rgba(22,101,52,0.35)]
+                shadow-[0_10px_30px_rgba(31,77,58,0.4)]
                 transition-all
                 duration-300
+                ease-out
                 hover:-translate-y-1
-                hover:bg-green-600
-                hover:shadow-[0_15px_40px_rgba(22,101,52,0.45)]
+                hover:bg-[#285F48]
+                hover:shadow-[0_15px_40px_rgba(31,77,58,0.5)]
                 active:translate-y-0
                 active:scale-95
-            "
+              `}
             >
-            {/* Shine animation */}
+            {/* Shine */}
             <span
-                className="
+              className="
                 absolute
                 inset-0
                 -translate-x-full
@@ -222,41 +371,83 @@ export default function Hero() {
                 transition-transform
                 duration-700
                 group-hover:translate-x-full
-                "
+              "
             />
 
             {/* Download Icon */}
             <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="
                 relative
                 h-5
                 w-5
                 transition-transform
                 duration-300
                 group-hover:translate-y-0.5
-                "
+              "
             >
-                <path d="M12 3v12" />
-                <path d="m7 10 5 5 5-5" />
-                <path d="M5 21h14" />
+              <path d="M12 3v12" />
+              <path d="m7 10 5 5 5-5" />
+              <path d="M5 21h14" />
             </svg>
 
-            {/* Text */}
             <span className="relative">
-                Download App
+              Download App
             </span>
-            </button>
+          </button>
+
+            {/* ==================================================
+                FEATURES
+                ================================================== */}
+
+            <div
+              className={`
+                ${inter.className}
+                mt-5
+                flex
+                flex-wrap
+                justify-center
+                gap-x-3
+                gap-y-1
+                text-xs
+                text-white/55
+              `}
+            >
+              <span>AR Experience</span>
+              <span>•</span>
+              <span>Navigation</span>
+              <span>•</span>
+              <span>Games</span>
+              <span>•</span>
+              <span>Reservations</span>
+            </div>
 
           </div>
-
         </div>
+
+        {/* ==================================================
+            BOTTOM GRADIENT
+            ================================================== */}
+
+        <div
+          className="
+            pointer-events-none
+            absolute
+            bottom-0
+            left-0
+            right-0
+            h-32
+            bg-gradient-to-t
+            from-black/30
+            to-transparent
+          "
+        />
 
       </div>
     </section>
