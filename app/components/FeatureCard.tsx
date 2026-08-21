@@ -2,10 +2,33 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import {
+  Cinzel_Decorative,
+  Inter,
+  Noto_Sans_Hanunoo,
+} from "next/font/google";
+
+const cinzelDecorative = Cinzel_Decorative({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+});
+
+const notoHanunoo = Noto_Sans_Hanunoo({
+  subsets: ["hanunoo"],
+  weight: ["400"],
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 type FeatureCardProps = {
   number: string;
   title: string;
+  hanunoo: string;
   description: string;
   image: string;
   buttonText: string;
@@ -15,6 +38,7 @@ type FeatureCardProps = {
 export default function FeatureCard({
   number,
   title,
+  hanunoo,
   description,
   image,
   buttonText,
@@ -47,7 +71,6 @@ export default function FeatureCard({
     };
   }, []);
 
-  // Scroll to CTA every time the button is clicked
   const handleFeatureClick = () => {
     const downloadSection = document.getElementById("download");
 
@@ -62,19 +85,28 @@ export default function FeatureCard({
   return (
     <article
       ref={featureRef}
-      className="grid items-center gap-10 md:grid-cols-2 md:gap-16"
+      className={`
+        ${inter.className}
+        grid
+        items-center
+        gap-10
+        md:grid-cols-2
+        md:gap-16
+      `}
     >
-      {/* ==================================================
-          IMAGE
-      ================================================== */}
+      {/* IMAGE */}
 
       <div
         className={`
-          relative aspect-[4/3]
-          overflow-hidden rounded-[2rem]
-          bg-gray-100
+          relative
+          aspect-[4/3]
+          overflow-hidden
+          rounded-[2rem]
+          bg-[#F3EBDD]
 
-          transition-all duration-1000 ease-out
+          transition-all
+          duration-1000
+          ease-out
 
           ${
             isVisible
@@ -94,33 +126,34 @@ export default function FeatureCard({
           sizes="(max-width: 768px) 100vw, 50vw"
           className="
             object-cover
-            transition duration-700
+            transition
+            duration-700
             hover:scale-105
           "
         />
 
-        {/* Image Overlay */}
-
         <div
           className="
-            absolute inset-0
+            absolute
+            inset-0
             bg-black/5
-            transition duration-500
+            transition
+            duration-500
             hover:bg-black/0
           "
         />
       </div>
 
-      {/* ==================================================
-          CONTENT
-      ================================================== */}
+      {/* CONTENT */}
 
       <div
         className={`
           relative
 
-          transition-all duration-1000
-          ease-out delay-150
+          transition-all
+          duration-1000
+          ease-out
+          delay-150
 
           ${
             isVisible
@@ -133,101 +166,151 @@ export default function FeatureCard({
           ${reverse ? "md:order-1" : "md:order-2"}
         `}
       >
-        {/* Number */}
+        {/* NUMBER */}
 
         <span
           className="
             text-sm
             font-semibold
             tracking-[0.25em]
-            text-green-700
+            text-[#8A7565]
           "
         >
           {number}
         </span>
 
-        {/* Title */}
+        {/* FEATURE TITLE */}
 
         <h3
-          className="
-            mt-4
-            text-3xl
+          className={`
+            ${cinzelDecorative.className}
+            mt-3
+            text-2xl
             font-bold
+            leading-tight
             tracking-tight
-            text-gray-900
-            md:text-5xl
-          "
+            text-[#3A2024]
+
+            sm:text-3xl
+            md:text-4xl
+            lg:text-5xl
+          `}
         >
           {title}
         </h3>
 
-        {/* Description */}
+        {/* HANUNOO TRANSLATION */}
+
+        <div
+          className="
+            mt-2
+            flex
+            items-center
+            gap-3
+          "
+        >
+          {/* Small decorative line */}
+
+          <span
+            className="
+              h-px
+              w-8
+              bg-[#B78A4A]/50
+            "
+          />
+
+          <span
+            className={`
+              ${notoHanunoo.className}
+              text-[8px]
+              leading-none
+              text-[#8A7565]
+
+              sm:text-[9px]
+              md:text-[10px]
+            `}
+          >
+            {hanunoo}
+          </span>
+
+          {/* Small decorative line */}
+
+          <span
+            className="
+              h-px
+              w-8
+              bg-[#B78A4A]/50
+            "
+          />
+        </div>
+
+        {/* DESCRIPTION */}
 
         <p
           className="
             mt-5
             max-w-lg
-            text-base
-            leading-7
-            text-gray-600
+            text-sm
+            leading-6
+            text-[#6F6258]
+
+            sm:text-base
+            sm:leading-7
+
             md:text-lg
+            md:leading-7
           "
         >
           {description}
         </p>
 
-        {/* ==================================================
-            FEATURE BUTTON
-        ================================================== */}
+        {/* BUTTON */}
 
         <button
-            type="button"
-            onClick={handleFeatureClick}
+          type="button"
+          onClick={handleFeatureClick}
+          className="
+            group
+            mt-8
+            inline-flex
+            cursor-pointer
+            items-center
+            gap-2
+            rounded-full
+            bg-[#1F4D3A]
+            px-6
+            py-3
+            text-sm
+            font-semibold
+            text-white
+            shadow-[0_8px_20px_rgba(31,77,58,0.2)]
+
+            transition-all
+            duration-200
+
+            hover:-translate-y-1
+            hover:gap-3
+            hover:bg-[#285F48]
+            hover:shadow-[0_12px_25px_rgba(31,77,58,0.3)]
+
+            active:translate-y-0
+            active:scale-95
+            active:bg-[#163A2C]
+          "
+        >
+          {buttonText}
+
+          <span
+            aria-hidden="true"
             className="
-                group
-                mt-7
-                inline-flex
-                cursor-pointer
-                items-center
-                gap-2
-                rounded-full
-                bg-green-800
-                px-6
-                py-3
-                text-sm
-                font-semibold
-                text-white
-                shadow-sm
-
-                transition-all
-                duration-200
-                ease-out
-
-                hover:-translate-y-1
-                hover:gap-3
-                hover:bg-green-900
-                hover:shadow-lg
-
-                active:translate-y-0
-                active:scale-95
-                active:bg-green-950
-                active:shadow-inner
+              transition-transform
+              duration-200
+              group-hover:translate-x-1
             "
-            >
-            {buttonText}
-
-            <span
-                aria-hidden="true"
-                className="
-                transition-transform
-                duration-200
-                group-hover:translate-x-1
-                group-active:translate-x-0
-                "
-            >
-                →
-            </span>
-            </button>
+          >
+            →
+          </span>
+        </button>
       </div>
     </article>
   );

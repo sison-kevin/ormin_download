@@ -2,18 +2,54 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import {
+  Cinzel_Decorative,
+  Inter,
+  Noto_Sans_Hanunoo,
+} from "next/font/google";
+
+/* ==================================================
+   FONTS
+================================================== */
+
+const cinzelDecorative = Cinzel_Decorative({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+});
+
+const notoHanunoo = Noto_Sans_Hanunoo({
+  subsets: ["hanunoo"],
+  weight: ["400"],
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+});
+
+/* ==================================================
+   PROPS
+================================================== */
 
 type HowItWorksStepProps = {
   number: string;
   title: string;
+  hanunoo: string;
   description: string;
   image: string;
   reverse?: boolean;
 };
 
+/* ==================================================
+   COMPONENT
+================================================== */
+
 export default function HowItWorksStep({
   number,
   title,
+  hanunoo,
   description,
   image,
   reverse = false,
@@ -21,8 +57,13 @@ export default function HowItWorksStep({
   const stepRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
+  /* ==================================================
+     SCROLL ANIMATION
+  ================================================== */
+
   useEffect(() => {
     const element = stepRef.current;
+
     if (!element) return;
 
     const observer = new IntersectionObserver(
@@ -32,85 +73,284 @@ export default function HowItWorksStep({
           observer.unobserve(element);
         }
       },
-      { threshold: 0.15 }
+      {
+        threshold: 0.15,
+      }
     );
 
     observer.observe(element);
-    return () => observer.disconnect();
+
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
+  /* ==================================================
+     ANIMATION CLASSES
+  ================================================== */
+
+  const leftAnimation = isVisible
+    ? "translate-x-0 opacity-100"
+    : "-translate-x-16 opacity-0";
+
+  const rightAnimation = isVisible
+    ? "translate-x-0 opacity-100"
+    : "translate-x-16 opacity-0";
+
+  const mobileAnimation = isVisible
+    ? "translate-y-0 opacity-100"
+    : "translate-y-10 opacity-0";
+
   return (
-    <div ref={stepRef} className="relative py-8 md:py-12">
-      {/* =========================
-          DESKTOP TIMELINE (md and up)
-      ========================= */}
-      <div className="hidden md:grid min-h-[420px] grid-cols-[1fr_60px_1fr] items-center">
-        {/* Left Side */}
+    <div
+      ref={stepRef}
+      className="relative py-8 md:py-12"
+    >
+
+      {/* ==================================================
+          DESKTOP TIMELINE
+      ================================================== */}
+
+      <div className="hidden min-h-[420px] grid-cols-[1fr_60px_1fr] items-center md:grid">
+
+        {/* ==================================================
+            LEFT SIDE
+        ================================================== */}
+
         <div>
           {!reverse && (
             <div
-              className={`pr-8 text-right transition-all duration-1000 ease-out ${
-                isVisible ? "translate-x-0 opacity-100" : "-translate-x-16 opacity-0"
-              }`}
+              className={`
+                ${inter.className}
+                pr-8
+                text-right
+                transition-all
+                duration-1000
+                ease-out
+                ${leftAnimation}
+              `}
             >
-              <span className="text-sm font-semibold tracking-[0.25em] text-green-700">
+
+              {/* Number */}
+
+              <span
+                className="
+                  text-xs
+                  font-semibold
+                  tracking-[0.25em]
+                  text-[#5C1F2B]
+                "
+              >
                 {number}
               </span>
-              <h3 className="mt-3 text-3xl font-bold tracking-tight text-gray-900 lg:text-4xl">
+
+              {/* Title */}
+
+              <h3
+                className={`
+                  ${cinzelDecorative.className}
+                  mt-3
+                  text-2xl
+                  font-bold
+                  tracking-tight
+                  text-[#2B1B1E]
+                  lg:text-4xl
+                `}
+              >
                 {title}
               </h3>
-              <p className="ml-auto mt-4 max-w-md text-base leading-7 text-gray-600">
+
+              {/* Hanunoo */}
+
+              <div
+                className={`
+                  ${notoHanunoo.className}
+                  mt-2
+                  text-[9px]
+                  leading-none
+                  text-[#8A7565]
+                  lg:text-[10px]
+                `}
+              >
+                {hanunoo}
+              </div>
+
+              {/* Description */}
+
+              <p
+                className="
+                  ml-auto
+                  mt-4
+                  max-w-md
+                  text-sm
+                  leading-6
+                  text-[#5F5148]
+                  lg:text-base
+                  lg:leading-7
+                "
+              >
                 {description}
               </p>
+
+              {/* Image */}
+
               <div className="relative ml-auto mt-7 h-52 w-full max-w-md">
                 <Image
                   src={image}
                   alt={title}
                   fill
                   sizes="40vw"
-                  className="object-contain transition duration-700 hover:scale-105"
+                  className="
+                    object-contain
+                    transition
+                    duration-700
+                    hover:scale-105
+                  "
                 />
               </div>
             </div>
           )}
         </div>
 
-        {/* Center Line & Badge */}
+        {/* ==================================================
+            CENTER TIMELINE
+        ================================================== */}
+
         <div className="relative flex h-full items-center justify-center">
-          <div className="absolute top-0 h-full w-px bg-gray-200" />
+
+          {/* Vertical Line */}
+
           <div
-            className={`relative z-10 flex h-12 w-12 items-center justify-center rounded-full border-4 border-white bg-green-800 text-sm font-bold text-white shadow-md transition-all duration-700 ${
-              isVisible ? "scale-100 opacity-100" : "scale-50 opacity-0"
-            }`}
+            className="
+              absolute
+              top-0
+              h-full
+              w-px
+              bg-[#5C1F2B]/20
+            "
+          />
+
+          {/* Number Circle */}
+
+          <div
+            className={`
+              relative
+              z-10
+              flex
+              h-12
+              w-12
+              items-center
+              justify-center
+              rounded-full
+              border-4
+              border-[#EDE5D8]
+              bg-[#3A2024]
+              text-sm
+              font-bold
+              text-[#E2B889]
+              shadow-md
+              transition-all
+              duration-700
+              ${isVisible ? "scale-100 opacity-100" : "scale-50 opacity-0"}
+            `}
           >
             {number}
           </div>
         </div>
 
-        {/* Right Side */}
+        {/* ==================================================
+            RIGHT SIDE
+        ================================================== */}
+
         <div>
           {reverse && (
             <div
-              className={`pl-8 text-left transition-all duration-1000 ease-out delay-150 ${
-                isVisible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"
-              }`}
+              className={`
+                ${inter.className}
+                pl-8
+                text-left
+                transition-all
+                delay-150
+                duration-1000
+                ease-out
+                ${rightAnimation}
+              `}
             >
-              <span className="text-sm font-semibold tracking-[0.25em] text-green-700">
+
+              {/* Number */}
+
+              <span
+                className="
+                  text-xs
+                  font-semibold
+                  tracking-[0.25em]
+                  text-[#5C1F2B]
+                "
+              >
                 {number}
               </span>
-              <h3 className="mt-3 text-3xl font-bold tracking-tight text-gray-900 lg:text-4xl">
+
+              {/* Title */}
+
+              <h3
+                className={`
+                  ${cinzelDecorative.className}
+                  mt-3
+                  text-2xl
+                  font-bold
+                  tracking-tight
+                  text-[#2B1B1E]
+                  lg:text-4xl
+                `}
+              >
                 {title}
               </h3>
-              <p className="mt-4 max-w-md text-base leading-7 text-gray-600">
+
+              {/* Hanunoo */}
+
+              <div
+                className={`
+                  ${notoHanunoo.className}
+                  mt-2
+                  text-[9px]
+                  leading-none
+                  text-[#8A7565]
+                  lg:text-[10px]
+                `}
+              >
+                {hanunoo}
+              </div>
+
+              {/* Description */}
+
+              <p
+                className="
+                  mt-4
+                  max-w-md
+                  text-sm
+                  leading-6
+                  text-[#5F5148]
+                  lg:text-base
+                  lg:leading-7
+                "
+              >
                 {description}
               </p>
+
+              {/* Image */}
+
               <div className="relative mt-7 h-52 w-full max-w-md">
                 <Image
                   src={image}
                   alt={title}
                   fill
                   sizes="40vw"
-                  className="object-contain transition duration-700 hover:scale-105"
+                  className="
+                    object-contain
+                    transition
+                    duration-700
+                    hover:scale-105
+                  "
                 />
               </div>
             </div>
@@ -118,20 +358,104 @@ export default function HowItWorksStep({
         </div>
       </div>
 
-      {/* =========================
-          MOBILE LAYOUT (below md)
-      ========================= */}
+      {/* ==================================================
+          MOBILE LAYOUT
+      ================================================== */}
+
       <div
-        className={`flex flex-col items-center text-center md:hidden transition-all duration-1000 ease-out ${
-          isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-        }`}
+        className={`
+          ${inter.className}
+          flex
+          flex-col
+          items-center
+          text-center
+          transition-all
+          duration-1000
+          ease-out
+          md:hidden
+          ${mobileAnimation}
+        `}
       >
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#5c1f2b] text-xs font-bold text-white shadow-md">
+
+        {/* Number */}
+
+        <div
+          className="
+            flex
+            h-10
+            w-10
+            items-center
+            justify-center
+            rounded-full
+            bg-[#3A2024]
+            text-xs
+            font-bold
+            text-[#E2B889]
+            shadow-md
+          "
+        >
           {number}
         </div>
-        <h3 className="mt-3 text-2xl font-bold text-gray-900">{title}</h3>
-        <p className="mt-2 text-sm leading-6 text-gray-600 max-w-sm">{description}</p>
-        <div className="relative mt-5 h-48 w-full max-w-xs">
+
+        {/* Title */}
+
+        <h3
+          className={`
+            ${cinzelDecorative.className}
+            mt-3
+            text-xl
+            font-bold
+            tracking-tight
+            text-[#2B1B1E]
+            sm:text-2xl
+          `}
+        >
+          {title}
+        </h3>
+
+        {/* Hanunoo */}
+
+        <div
+          className={`
+            ${notoHanunoo.className}
+            mt-2
+            text-[8px]
+            leading-none
+            text-[#8A7565]
+            sm:text-[9px]
+          `}
+        >
+          {hanunoo}
+        </div>
+
+        {/* Description */}
+
+        <p
+          className="
+            mt-3
+            max-w-sm
+            text-xs
+            leading-5
+            text-[#5F5148]
+            sm:text-sm
+            sm:leading-6
+          "
+        >
+          {description}
+        </p>
+
+        {/* Image */}
+
+        <div
+          className="
+            relative
+            mt-5
+            h-44
+            w-full
+            max-w-xs
+            sm:h-48
+          "
+        >
           <Image
             src={image}
             alt={title}
@@ -144,3 +468,4 @@ export default function HowItWorksStep({
     </div>
   );
 }
+

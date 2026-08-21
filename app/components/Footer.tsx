@@ -1,5 +1,26 @@
 "use client";
 
+import Image from "next/image";
+import {
+  Cinzel_Decorative,
+  Inter,
+} from "next/font/google";
+
+/* ==================================================
+   FONTS
+================================================== */
+
+const cinzelDecorative = Cinzel_Decorative({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+});
+
 export default function Footer() {
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
@@ -17,7 +38,18 @@ export default function Footer() {
   };
 
   return (
-    <footer className="border-t border-gray-100 bg-white px-6 py-12 md:py-16">
+    <footer
+      className={`
+        ${inter.className}
+        border-t
+        border-[#3A2024]/10
+        bg-[#F3EBDD]
+        px-6
+        py-12
+
+        md:py-16
+      `}
+    >
       <div className="mx-auto max-w-6xl">
 
         {/* =========================
@@ -35,7 +67,8 @@ export default function Footer() {
             <button
               type="button"
               onClick={() => scrollToSection("home")}
-              className="
+              className={`
+                ${cinzelDecorative.className}
                 cursor-pointer
                 text-left
                 text-lg
@@ -45,22 +78,35 @@ export default function Footer() {
                 duration-300
                 hover:opacity-80
                 active:scale-95
-              "
+              `}
             >
+              {/* KEEP ORIGINAL e COLOR */}
+
               <span className="text-emerald-700">
                 e
               </span>
 
+              {/* KEEP ORIGINAL Ormin COLOR */}
+
               <span className="text-gray-900">
                 Ormin
               </span>{" "}
+
+              {/* KEEP ORIGINAL HERITAGE COLOR */}
 
               <span className="text-[#a3704c]">
                 Heritage
               </span>
             </button>
 
-            <p className="mt-2 text-sm leading-relaxed text-gray-400">
+            <p
+              className="
+                mt-3
+                text-sm
+                leading-relaxed
+                text-[#6F6258]
+              "
+            >
               Exploring heritage through technology.
             </p>
 
@@ -79,11 +125,12 @@ export default function Footer() {
               gap-y-3
               text-sm
               font-medium
-              text-gray-500
+              text-[#5C1F2B]
             "
           >
 
             {/* Home */}
+
             <button
               type="button"
               onClick={() => scrollToSection("home")}
@@ -91,7 +138,7 @@ export default function Footer() {
                 cursor-pointer
                 transition-all
                 duration-300
-                hover:text-emerald-700
+                hover:text-[#8A7565]
                 active:scale-95
               "
             >
@@ -99,6 +146,7 @@ export default function Footer() {
             </button>
 
             {/* Features */}
+
             <button
               type="button"
               onClick={() => scrollToSection("features")}
@@ -106,7 +154,7 @@ export default function Footer() {
                 cursor-pointer
                 transition-all
                 duration-300
-                hover:text-emerald-700
+                hover:text-[#8A7565]
                 active:scale-95
               "
             >
@@ -114,6 +162,7 @@ export default function Footer() {
             </button>
 
             {/* How It Works */}
+
             <button
               type="button"
               onClick={() =>
@@ -123,7 +172,7 @@ export default function Footer() {
                 cursor-pointer
                 transition-all
                 duration-300
-                hover:text-emerald-700
+                hover:text-[#8A7565]
                 active:scale-95
               "
             >
@@ -131,6 +180,7 @@ export default function Footer() {
             </button>
 
             {/* Explore */}
+
             <button
               type="button"
               onClick={() =>
@@ -140,7 +190,7 @@ export default function Footer() {
                 cursor-pointer
                 transition-all
                 duration-300
-                hover:text-emerald-700
+                hover:text-[#8A7565]
                 active:scale-95
               "
             >
@@ -151,6 +201,36 @@ export default function Footer() {
 
         </div>
 
+        {/* Logos */}
+
+        {/* Logos */}
+
+        <div className="mt-5 flex items-center gap-.5">
+          <Image
+            src="/images/logo1.png"
+            alt="Logo 1"
+            width={55}
+            height={55}
+            className="h-12 w-auto object-contain"
+          />
+
+          <Image
+            src="/images/logo2.png"
+            alt="Logo 2"
+            width={65}
+            height={65}
+            className="h-17 w-auto object-contain"
+          />
+
+          <Image
+            src="/images/logo3.png"
+            alt="Logo 3"
+            width={65}
+            height={65}
+            className="h-12 w-auto object-contain"
+          />
+        </div>
+
         {/* =========================
             COPYRIGHT
         ========================= */}
@@ -159,12 +239,12 @@ export default function Footer() {
           className="
             mt-10
             border-t
-            border-gray-100
+            border-[#3A2024]/10
             pt-8
             text-xs
             font-normal
             tracking-wide
-            text-gray-400
+            text-[#8A7565]
           "
         >
           © 2026 eOrmin Heritage. All rights reserved.
