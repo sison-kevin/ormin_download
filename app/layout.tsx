@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   title: "eOrmin Heritage Museum",
   description:
     "Explore the heritage, culture, and history of Oriental Mindoro.",
+  icons: {
+    icon: "/images/logonav.png",
+  },
 };
 
 export default function RootLayout({

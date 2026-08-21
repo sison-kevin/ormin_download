@@ -106,7 +106,6 @@ export default function HowItWorksStep({
       ref={stepRef}
       className="relative py-8 md:py-12"
     >
-
       {/* ==================================================
           DESKTOP TIMELINE
       ================================================== */}
@@ -130,7 +129,6 @@ export default function HowItWorksStep({
                 ${leftAnimation}
               `}
             >
-
               {/* Number */}
 
               <span
@@ -162,17 +160,44 @@ export default function HowItWorksStep({
 
               {/* Hanunoo */}
 
-              <div
-                className={`
-                  ${notoHanunoo.className}
-                  mt-2
-                  text-[9px]
-                  leading-none
-                  text-[#8A7565]
-                  lg:text-[10px]
-                `}
-              >
-                {hanunoo}
+              <div className="mt-2 flex items-center justify-end gap-2">
+                {/* Left Line */}
+
+                <span
+                  aria-hidden="true"
+                  className="
+                    h-px
+                    w-8
+                    bg-[#B78A4A]/50
+                    lg:w-12
+                  "
+                />
+
+                {/* Hanunoo Text */}
+
+                <span
+                  className={`
+                    ${notoHanunoo.className}
+                    text-[9px]
+                    leading-none
+                    text-[#8A7565]
+                    lg:text-[10px]
+                  `}
+                >
+                  {hanunoo}
+                </span>
+
+                {/* Right Line */}
+
+                <span
+                  aria-hidden="true"
+                  className="
+                    h-px
+                    w-8
+                    bg-[#B78A4A]/50
+                    lg:w-12
+                  "
+                />
               </div>
 
               {/* Description */}
@@ -251,7 +276,11 @@ export default function HowItWorksStep({
               shadow-md
               transition-all
               duration-700
-              ${isVisible ? "scale-100 opacity-100" : "scale-50 opacity-0"}
+              ${
+                isVisible
+                  ? "scale-100 opacity-100"
+                  : "scale-50 opacity-0"
+              }
             `}
           >
             {number}
@@ -276,7 +305,6 @@ export default function HowItWorksStep({
                 ${rightAnimation}
               `}
             >
-
               {/* Number */}
 
               <span
@@ -308,17 +336,44 @@ export default function HowItWorksStep({
 
               {/* Hanunoo */}
 
-              <div
-                className={`
-                  ${notoHanunoo.className}
-                  mt-2
-                  text-[9px]
-                  leading-none
-                  text-[#8A7565]
-                  lg:text-[10px]
-                `}
-              >
-                {hanunoo}
+              <div className="mt-2 flex items-center justify-start gap-2">
+                {/* Left Line */}
+
+                <span
+                  aria-hidden="true"
+                  className="
+                    h-px
+                    w-8
+                    bg-[#B78A4A]/50
+                    lg:w-12
+                  "
+                />
+
+                {/* Hanunoo Text */}
+
+                <span
+                  className={`
+                    ${notoHanunoo.className}
+                    text-[9px]
+                    leading-none
+                    text-[#8A7565]
+                    lg:text-[10px]
+                  `}
+                >
+                  {hanunoo}
+                </span>
+
+                {/* Right Line */}
+
+                <span
+                  aria-hidden="true"
+                  className="
+                    h-px
+                    w-8
+                    bg-[#B78A4A]/50
+                    lg:w-12
+                  "
+                />
               </div>
 
               {/* Description */}
@@ -376,7 +431,6 @@ export default function HowItWorksStep({
           ${mobileAnimation}
         `}
       >
-
         {/* Number */}
 
         <div
@@ -415,17 +469,45 @@ export default function HowItWorksStep({
 
         {/* Hanunoo */}
 
-        <div
-          className={`
-            ${notoHanunoo.className}
-            mt-2
-            text-[8px]
-            leading-none
-            text-[#8A7565]
-            sm:text-[9px]
-          `}
-        >
-          {hanunoo}
+        <div className="mt-2 flex w-full items-center justify-center gap-2 px-4">
+          {/* Left Line */}
+
+          <span
+            aria-hidden="true"
+            className="
+              h-px
+              w-6
+              bg-[#B78A4A]/50
+              sm:w-8
+            "
+          />
+
+          {/* Hanunoo Text */}
+
+          <span
+            className={`
+              ${notoHanunoo.className}
+              shrink-0
+              text-[8px]
+              leading-none
+              text-[#8A7565]
+              sm:text-[9px]
+            `}
+          >
+            {hanunoo}
+          </span>
+
+          {/* Right Line */}
+
+          <span
+            aria-hidden="true"
+            className="
+              h-px
+              w-6
+              bg-[#B78A4A]/50
+              sm:w-8
+            "
+          />
         </div>
 
         {/* Description */}
@@ -468,4 +550,3 @@ export default function HowItWorksStep({
     </div>
   );
 }
-
