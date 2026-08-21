@@ -205,23 +205,24 @@ export default function Explore() {
               items-center
               gap-2
               rounded-full
-              bg-[#1F4D3A]
+              bg-[#3A2024]
               px-6
               py-3
               text-xs
               font-semibold
-              text-white
-              shadow-[0_8px_20px_rgba(31,77,58,0.25)]
+              text-[#F3EBDD]
+              shadow-[0_8px_20px_rgba(58,32,36,0.2)]
               transition-all
               duration-300
 
               hover:-translate-y-1
               hover:gap-3
-              hover:bg-[#285F48]
-              hover:shadow-[0_12px_28px_rgba(31,77,58,0.35)]
+              hover:bg-[#4E2B31]
+              hover:shadow-[0_12px_28px_rgba(58,32,36,0.3)]
 
               active:translate-y-0
               active:scale-95
+              active:bg-[#2B1B1E]
 
               sm:mt-7
               sm:px-7
@@ -246,4 +247,3 @@ export default function Explore() {
     </section>
   );
 }
-

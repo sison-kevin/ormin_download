@@ -266,51 +266,51 @@ export default function FeatureCard({
 
         {/* BUTTON */}
 
-        <button
-          type="button"
-          onClick={handleFeatureClick}
-          className="
-            group
-            mt-8
-            inline-flex
-            cursor-pointer
-            items-center
-            gap-2
-            rounded-full
-            bg-[#1F4D3A]
-            px-6
-            py-3
-            text-sm
-            font-semibold
-            text-white
-            shadow-[0_8px_20px_rgba(31,77,58,0.2)]
+<button
+  type="button"
+  onClick={handleFeatureClick}
+  className="
+    group
+    mt-8
+    inline-flex
+    cursor-pointer
+    items-center
+    gap-2
+    rounded-full
+    bg-[#3A2024]
+    px-6
+    py-3
+    text-sm
+    font-semibold
+    text-[#F3EBDD]
+    shadow-[0_8px_20px_rgba(58,32,36,0.2)]
 
-            transition-all
-            duration-200
+    transition-all
+    duration-200
 
-            hover:-translate-y-1
-            hover:gap-3
-            hover:bg-[#285F48]
-            hover:shadow-[0_12px_25px_rgba(31,77,58,0.3)]
+    hover:-translate-y-1
+    hover:gap-3
+    hover:bg-[#4E2B31]
+    hover:shadow-[0_12px_25px_rgba(58,32,36,0.3)]
 
-            active:translate-y-0
-            active:scale-95
-            active:bg-[#163A2C]
-          "
-        >
-          {buttonText}
+    active:translate-y-0
+    active:scale-95
+    active:bg-[#2B1B1E]
+  "
+>
+  {buttonText}
 
-          <span
-            aria-hidden="true"
-            className="
-              transition-transform
-              duration-200
-              group-hover:translate-x-1
-            "
-          >
-            →
-          </span>
-        </button>
+  <span
+    aria-hidden="true"
+    className="
+      transition-transform
+      duration-200
+      group-hover:translate-x-1
+    "
+  >
+    →
+  </span>
+</button>
       </div>
     </article>
   );

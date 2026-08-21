@@ -9,7 +9,7 @@ import { useEffect, useRef, useState } from "react";
 
 /* ==================================================
    FONTS
-   ================================================== */
+================================================== */
 
 const cinzelDecorative = Cinzel_Decorative({
   subsets: ["latin"],
@@ -255,7 +255,7 @@ export default function Hero() {
               font-bold
               leading-[1.15]
               tracking-normal
-              text-white
+              text-[#F3EBDD]
               drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)]
 
               sm:text-4xl
@@ -278,7 +278,7 @@ export default function Hero() {
 
             <br />
 
-            <span className="text-white">
+            <span className="text-[#F3EBDD]">
               Made Simple
             </span>
           </h1>
@@ -296,7 +296,7 @@ export default function Hero() {
                 max-w-xl
                 text-[10px]
                 leading-4
-                text-white/85
+                text-[#F3EBDD]/85
                 drop-shadow-md
 
                 sm:mt-5
@@ -341,19 +341,19 @@ export default function Hero() {
                 gap-3
                 overflow-hidden
                 rounded-full
-                bg-[#1F4D3A]
+                bg-[#E2B889]
                 px-7
                 py-3.5
                 text-sm
                 font-semibold
-                text-white
-                shadow-[0_10px_30px_rgba(31,77,58,0.4)]
+                text-[#2B1B1E]
+                shadow-[0_10px_30px_rgba(226,184,137,0.25)]
                 transition-all
                 duration-300
                 ease-out
                 hover:-translate-y-1
-                hover:bg-[#285F48]
-                hover:shadow-[0_15px_40px_rgba(31,77,58,0.5)]
+                hover:bg-[#EBD0A8]
+                hover:shadow-[0_15px_40px_rgba(226,184,137,0.35)]
                 active:translate-y-0
                 active:scale-95
               `}
@@ -366,7 +366,7 @@ export default function Hero() {
                 -translate-x-full
                 bg-gradient-to-r
                 from-transparent
-                via-white/20
+                via-white/30
                 to-transparent
                 transition-transform
                 duration-700
@@ -416,7 +416,7 @@ export default function Hero() {
                 gap-x-3
                 gap-y-1
                 text-xs
-                text-white/55
+                text-[#F3EBDD]/60
               `}
             >
               <span>AR Experience</span>
@@ -444,7 +444,7 @@ export default function Hero() {
             right-0
             h-32
             bg-gradient-to-t
-            from-black/30
+            from-[#2B1B1E]
             to-transparent
           "
         />

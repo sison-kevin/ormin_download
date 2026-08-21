@@ -1,4 +1,3 @@
-
 "use client";
 
 import Image from "next/image";
@@ -384,22 +383,23 @@ export default function CTA() {
                   gap-3
                   overflow-hidden
                   rounded-full
-                  bg-[#1F4D3A]
+                  bg-[#E2B889]
                   px-7
                   py-3.5
                   text-xs
                   font-semibold
-                  text-white
-                  shadow-[0_10px_30px_rgba(31,77,58,0.35)]
+                  text-[#2B1B1E]
+                  shadow-[0_10px_30px_rgba(226,184,137,0.25)]
                   transition-all
                   duration-300
 
                   hover:-translate-y-1
-                  hover:bg-[#285F48]
-                  hover:shadow-[0_15px_40px_rgba(31,77,58,0.45)]
+                  hover:bg-[#EBD0A8]
+                  hover:shadow-[0_15px_40px_rgba(226,184,137,0.35)]
 
                   active:translate-y-0
                   active:scale-95
+                  active:bg-[#D4A36F]
 
                   sm:px-8
                   sm:py-4
@@ -416,7 +416,7 @@ export default function CTA() {
                     -translate-x-full
                     bg-gradient-to-r
                     from-transparent
-                    via-white/20
+                    via-white/40
                     to-transparent
                     transition-transform
                     duration-700
@@ -490,4 +490,3 @@ export default function CTA() {
     </section>
   );
 }
-

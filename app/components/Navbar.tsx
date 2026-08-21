@@ -1,187 +1,140 @@
 "use client";
 
+import {
+  Cinzel_Decorative,
+  Inter,
+  Noto_Sans_Hanunoo,
+} from "next/font/google";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 
+/* ==================================================
+   FONTS
+================================================== */
+
+const cinzelDecorative = Cinzel_Decorative({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const notoHanunoo = Noto_Sans_Hanunoo({
+  subsets: ["hanunoo"],
+  weight: ["400"],
+  display: "swap",
+});
+
+/* ==================================================
+   NAVBAR COMPONENT
+================================================== */
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [showNavbar, setShowNavbar] = useState(true);
+  const [activeSection, setActiveSection] = useState("home");
 
-  /*
-   * ==========================================
-   * SHOW / HIDE NAVBAR BASED ON HERO
-   * ==========================================
-   */
-
+  /* Track Active Section on Scroll */
   useEffect(() => {
+    const sections = ["home", "features", "how-it-works", "explore"];
+
     const handleScroll = () => {
-      const hero = document.getElementById("home");
+      const scrollPosition = window.scrollY + 100;
 
-      if (!hero) return;
+      for (const sectionId of sections) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const top = element.offsetTop;
+          const height = element.offsetHeight;
 
-      const rect = hero.getBoundingClientRect();
-
-      /*
-       * The navbar is visible while the Hero
-       * section is still visible.
-       *
-       * Once the Hero completely leaves the
-       * viewport, hide the navbar.
-       */
-
-      const heroIsVisible =
-        rect.top < window.innerHeight &&
-        rect.bottom > 0;
-
-      setShowNavbar(heroIsVisible);
-
-      /*
-       * Close mobile menu when leaving Hero.
-       */
-
-      if (!heroIsVisible) {
-        setIsOpen(false);
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            setActiveSection(sectionId);
+            break;
+          }
+        }
       }
     };
 
-    window.addEventListener("scroll", handleScroll, {
-      passive: true,
-    });
-
-    // Run once when the page loads
-    handleScroll();
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const navLinks = [
+    { name: "Home", href: "#home", id: "home" },
+    { name: "Features", href: "#features", id: "features" },
+    { name: "How It Works", href: "#how-it-works", id: "how-it-works" },
+    { name: "Explore", href: "#explore", id: "explore" },
+  ];
 
   return (
     <header
-      className={`
+      className="
         fixed
-        left-1/2
-        top-4
+        left-0
+        right-0
+        top-0
         z-[9999]
-
-        w-[calc(100%-1rem)]
-        max-w-5xl
-
-        -translate-x-1/2
-
+        h-16
+        w-full
+        border-b
+        border-[#E2B889]/15
+        bg-[#2B1B1E]/70
+        shadow-lg
+        backdrop-blur-md
         transition-all
-        duration-500
-        ease-out
-
-        ${
-          showNavbar
-            ? "translate-y-0 opacity-100"
-            : "-translate-y-8 pointer-events-none opacity-0"
-        }
-      `}
+        duration-300
+        sm:h-[72px]
+      "
     >
       {/* ==================================================
-          GLASS NAVBAR
+          MAIN FULL-WIDTH CONTAINER
       ================================================== */}
 
-      <div
-        className="
-          relative
-
-          flex
-          items-center
-          justify-between
-
-          rounded-full
-
-          border
-          border-white/20
-
-          bg-white/10
-
-          px-4
-          py-2.5
-
-          shadow-[0_8px_32px_rgba(0,0,0,0.18)]
-
-          backdrop-blur-xl
-          backdrop-saturate-150
-
-          sm:px-5
-        "
-      >
+      <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-6 lg:px-10">
+        
         {/* ==================================================
-            BRAND
+            BRANDING
         ================================================== */}
 
         <Link
           href="#home"
           onClick={() => setIsOpen(false)}
-          className="
-            flex
-            shrink-0
-            items-center
-            gap-2
-
-            transition
-            duration-200
-
-            hover:opacity-90
-          "
+          className="group flex flex-col justify-center"
         >
-          {/* Logo */}
-
-          <div
-            className="
-              flex
-              h-8
-              w-8
-              shrink-0
-
-              items-center
-              justify-center
-
-              rounded-full
-
-              border
-              border-white/10
-
-              bg-emerald-600
-
-              text-xs
-              font-bold
-              text-white
-
-              shadow-md
-            "
-          >
-            eO
-          </div>
-
-          {/* Brand Name */}
-
           <span
-            className="
-              text-sm
+            className={`
+              ${cinzelDecorative.className}
+              text-lg
               font-bold
               tracking-tight
-              text-white
-
-              sm:text-base
-            "
+              transition-opacity
+              duration-300
+              group-hover:opacity-90
+              sm:text-xl
+            `}
           >
-            <span className="text-emerald-400">
-              e
-            </span>
+            {/* Swapped green for unified gold accent */}
+            <span className="text-[#E2B889]">e</span>
+            <span className="text-white">Ormin</span>{" "}
+            <span className="text-[#E2B889]">Heritage</span>
+          </span>
 
-            <span className="text-white">
-              Ormin
-            </span>{" "}
-
-            <span className="text-[#d6c2aa]">
-              Heritage
-            </span>
+          {/* Hanunoo Cultural Subtitle */}
+          <span
+            className={`
+              ${notoHanunoo.className}
+              -mt-0.5
+              text-[9px]
+              leading-none
+              tracking-wider
+              text-[#E2B889]/60
+            `}
+          >
+            ᜁᜂᜇᜋᜒᜈ᜔ ᜑᜒᜇᜒᜆᜊᜒ
           </span>
         </Link>
 
@@ -190,143 +143,98 @@ export default function Navbar() {
         ================================================== */}
 
         <nav
-          className="
+          className={`
+            ${inter.className}
             hidden
-
             items-center
-            gap-5
-
-            text-xs
-            font-medium
-            text-white/80
-
+            gap-8
             md:flex
-            lg:gap-7
-            lg:text-sm
-          "
+          `}
         >
-          {/* Home */}
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.id;
 
-          <Link
-            href="#home"
-            className="
-              rounded-full
-              px-2
-              py-1.5
+            return (
+              <Link
+                key={link.name}
+                href={link.href}
+                className={`
+                  group
+                  relative
+                  py-1
+                  text-xs
+                  font-medium
+                  tracking-wide
+                  transition-colors
+                  duration-300
+                  lg:text-sm
+                  ${
+                    isActive
+                      ? "text-[#E2B889]"
+                      : "text-[#F3EBDD]/85 hover:text-[#E2B889]"
+                  }
+                `}
+              >
+                {link.name}
 
-              transition
-              duration-200
-
-              hover:bg-white/10
-              hover:text-white
-            "
-          >
-            Home
-          </Link>
-
-          {/* Features */}
-
-          <Link
-            href="#features"
-            className="
-              rounded-full
-              px-2
-              py-1.5
-
-              transition
-              duration-200
-
-              hover:bg-white/10
-              hover:text-white
-            "
-          >
-            Features
-          </Link>
-
-          {/* How It Works */}
-
-          <Link
-            href="#how-it-works"
-            className="
-              rounded-full
-              px-2
-              py-1.5
-
-              transition
-              duration-200
-
-              hover:bg-white/10
-              hover:text-white
-            "
-          >
-            How It Works
-          </Link>
-
-          {/* Explore */}
-
-          <Link
-            href="#explore"
-            className="
-              rounded-full
-              px-2
-              py-1.5
-
-              transition
-              duration-200
-
-              hover:bg-white/10
-              hover:text-white
-            "
-          >
-            Explore
-          </Link>
+                {/* Subtle Hover & Active Underline Indicator */}
+                <span
+                  className={`
+                    absolute
+                    bottom-0
+                    left-0
+                    h-[1.5px]
+                    w-full
+                    bg-[#E2B889]
+                    transition-transform
+                    duration-300
+                    ease-out
+                    ${
+                      isActive
+                        ? "scale-x-100"
+                        : "scale-x-0 group-hover:scale-x-100"
+                    }
+                  `}
+                />
+              </Link>
+            );
+          })}
         </nav>
 
         {/* ==================================================
-            DESKTOP GET THE APP
+            DESKTOP CTA
         ================================================== */}
 
-        <Link
-          href="#download"
-          className="
-            hidden
-
-            shrink-0
-
-            rounded-full
-
-            border
-            border-white/20
-
-            bg-white/90
-
-            px-4
-            py-2
-
-            text-xs
-            font-bold
-            text-gray-900
-
-            shadow-sm
-
-            transition-all
-            duration-200
-
-            hover:-translate-y-0.5
-            hover:bg-white
-            hover:shadow-lg
-
-            active:translate-y-0
-            active:scale-95
-
-            md:block
-          "
-        >
-          Get The App
-        </Link>
+        <div className="hidden md:block">
+          <Link
+            href="#download"
+            className={`
+              ${inter.className}
+              inline-flex
+              items-center
+              justify-center
+              rounded-md
+              bg-[#E2B889]
+              px-5
+              py-2
+              text-xs
+              font-semibold
+              tracking-wider
+              text-[#2B1B1E]
+              shadow-sm
+              transition-all
+              duration-300
+              hover:bg-[#EBD0A8]
+              active:scale-95
+              lg:text-sm
+            `}
+          >
+            Get The App
+          </Link>
+        </div>
 
         {/* ==================================================
-            MOBILE MENU BUTTON
+            MOBILE HAMBURGER BUTTON
         ================================================== */}
 
         <button
@@ -334,192 +242,102 @@ export default function Navbar() {
           onClick={() => setIsOpen(!isOpen)}
           className="
             flex
-            shrink-0
-
+            h-10
+            w-10
             items-center
             justify-center
-
-            rounded-full
-
-            p-2
-
-            text-white
-
-            transition-all
-            duration-200
-
-            hover:bg-white/10
-
-            active:scale-90
-
+            rounded-md
+            text-[#F3EBDD]
+            transition-colors
+            hover:text-[#E2B889]
             md:hidden
           "
           aria-label="Toggle Menu"
           aria-expanded={isOpen}
         >
-          {isOpen ? (
-            <X size={20} />
-          ) : (
-            <Menu size={20} />
-          )}
+          {isOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
 
       {/* ==================================================
-          MOBILE MENU
+          MOBILE DROPDOWN MENU
       ================================================== */}
 
       <div
         className={`
-          mt-2
-
-          overflow-hidden
-
-          rounded-2xl
-
-          border
-          border-white/20
-
-          bg-black/50
-
-          shadow-[0_12px_40px_rgba(0,0,0,0.25)]
-
+          absolute
+          left-0
+          top-full
+          w-full
+          border-b
+          border-[#E2B889]/20
+          bg-[#2B1B1E]/95
+          shadow-2xl
           backdrop-blur-xl
-          backdrop-saturate-150
-
           transition-all
           duration-300
-
+          ease-in-out
           md:hidden
-
           ${
             isOpen
-              ? "max-h-[500px] translate-y-0 opacity-100"
-              : "pointer-events-none max-h-0 -translate-y-2 opacity-0"
+              ? "max-h-96 opacity-100"
+              : "pointer-events-none max-h-0 opacity-0"
           }
+          overflow-hidden
         `}
       >
         <nav
-          className="
+          className={`
+            ${inter.className}
             flex
             flex-col
-            gap-2
-
-            p-5
-
-            text-center
-            text-sm
-            font-medium
-            text-white
-          "
+            gap-1
+            px-6
+            py-6
+          `}
         >
-          {/* Home */}
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.id;
 
-          <Link
-            href="#home"
-            onClick={() => setIsOpen(false)}
-            className="
-              rounded-xl
-              px-3
-              py-2.5
-
-              transition
-
-              hover:bg-white/10
-              hover:text-emerald-400
-            "
-          >
-            Home
-          </Link>
-
-          {/* Features */}
-
-          <Link
-            href="#features"
-            onClick={() => setIsOpen(false)}
-            className="
-              rounded-xl
-              px-3
-              py-2.5
-
-              transition
-
-              hover:bg-white/10
-              hover:text-emerald-400
-            "
-          >
-            Features
-          </Link>
-
-          {/* How It Works */}
-
-          <Link
-            href="#how-it-works"
-            onClick={() => setIsOpen(false)}
-            className="
-              rounded-xl
-              px-3
-              py-2.5
-
-              transition
-
-              hover:bg-white/10
-              hover:text-emerald-400
-            "
-          >
-            How It Works
-          </Link>
-
-          {/* Explore */}
-
-          <Link
-            href="#explore"
-            onClick={() => setIsOpen(false)}
-            className="
-              rounded-xl
-              px-3
-              py-2.5
-
-              transition
-
-              hover:bg-white/10
-              hover:text-emerald-400
-            "
-          >
-            Explore
-          </Link>
-
-          {/* Get The App */}
+            return (
+              <Link
+                key={link.name}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className={`
+                  rounded-md
+                  py-3
+                  text-sm
+                  font-medium
+                  transition-colors
+                  ${
+                    isActive
+                      ? "text-[#E2B889]"
+                      : "text-[#F3EBDD]/80 hover:text-[#E2B889]"
+                  }
+                `}
+              >
+                {link.name}
+              </Link>
+            );
+          })}
 
           <Link
             href="#download"
             onClick={() => setIsOpen(false)}
             className="
-              mt-2
-
+              mt-4
+              block
               w-full
-
-              rounded-full
-
-              bg-white
-
+              rounded-md
+              bg-[#E2B889]
               py-3
-
               text-center
-
               text-sm
-              font-bold
-              text-gray-900
-
-              shadow-md
-
+              font-semibold
+              text-[#2B1B1E]
               transition-all
-              duration-200
-
-              hover:bg-emerald-50
-              hover:shadow-lg
-
-              active:scale-95
+              hover:bg-[#EBD0A8]
             "
           >
             Get The App
