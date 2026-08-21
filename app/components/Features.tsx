@@ -8,9 +8,7 @@ const features = [
       "Bring heritage to life through augmented reality. View selected artifacts as immersive 3D experiences and discover history in a more interactive way.",
     image: "/images/feature-ar.jpg",
     buttonText: "Experience AR",
-    href: "#download",
   },
-
   {
     number: "02",
     title: "AR Navigation",
@@ -18,9 +16,7 @@ const features = [
       "Find your way around the museum with augmented reality navigation. Locate artifacts and important areas while exploring the museum.",
     image: "/images/feature-navigation.jpg",
     buttonText: "Start Navigation",
-    href: "#download",
   },
-
   {
     number: "03",
     title: "Interactive Games",
@@ -28,9 +24,7 @@ const features = [
       "Make learning about heritage more engaging through interactive games designed to help visitors discover and remember the history and culture of Oriental Mindoro.",
     image: "/images/feature-games.jpg",
     buttonText: "Play & Learn",
-    href: "#download",
   },
-
   {
     number: "04",
     title: "Reservation",
@@ -38,7 +32,6 @@ const features = [
       "Plan your museum visit ahead of time. Check available schedules and make a reservation through the application for a more convenient experience.",
     image: "/images/feature-reservation.jpg",
     buttonText: "Make a Reservation",
-    href: "#download",
   },
 ];
 
