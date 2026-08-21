@@ -132,7 +132,6 @@ export default function Features() {
               description={feature.description}
               image={feature.image}
               buttonText={feature.buttonText}
-              href={feature.href}
               reverse={index % 2 !== 0}
             />
           ))}
