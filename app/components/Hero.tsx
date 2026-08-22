@@ -323,41 +323,41 @@ export default function Hero() {
                 DOWNLOAD BUTTON
                 ================================================== */}
 
-           <button
-              type="button"
-              className={`
-                ${inter.className}
-                group
-                relative
+          <button
+  type="button"
+  className={`
+    ${inter.className}
+    group
+    relative
 
-                mt-10
-                sm:mt-11
-                md:mt-12
-                lg:mt-14
-                xl:mt-16
+    mt-16
+    sm:mt-[72px]
+    md:mt-20
+    lg:mt-14
+    xl:mt-16
 
-                inline-flex
-                items-center
-                gap-3
-                overflow-hidden
-                rounded-full
-                bg-[#E2B889]
-                px-7
-                py-3.5
-                text-sm
-                font-semibold
-                text-[#2B1B1E]
-                shadow-[0_10px_30px_rgba(226,184,137,0.25)]
-                transition-all
-                duration-300
-                ease-out
-                hover:-translate-y-1
-                hover:bg-[#EBD0A8]
-                hover:shadow-[0_15px_40px_rgba(226,184,137,0.35)]
-                active:translate-y-0
-                active:scale-95
-              `}
-            >
+    inline-flex
+    items-center
+    gap-3
+    overflow-hidden
+    rounded-full
+    bg-[#E2B889]
+    px-7
+    py-3.5
+    text-sm
+    font-semibold
+    text-[#2B1B1E]
+    shadow-[0_10px_30px_rgba(226,184,137,0.25)]
+    transition-all
+    duration-300
+    ease-out
+    hover:-translate-y-1
+    hover:bg-[#EBD0A8]
+    hover:shadow-[0_15px_40px_rgba(226,184,137,0.35)]
+    active:translate-y-0
+    active:scale-95
+  `}
+>
             {/* Shine */}
             <span
               className="
@@ -420,8 +420,6 @@ export default function Hero() {
               `}
             >
               <span>AR Experience</span>
-              <span>•</span>
-              <span>Navigation</span>
               <span>•</span>
               <span>Games</span>
               <span>•</span>

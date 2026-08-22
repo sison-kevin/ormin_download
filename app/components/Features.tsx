@@ -77,6 +77,7 @@ export default function Features() {
     <section
       id="features"
       className="
+        relative
         w-full
         max-w-full
         overflow-hidden
@@ -90,7 +91,30 @@ export default function Features() {
         md:py-32
       "
     >
-      <div className="mx-auto max-w-6xl">
+      {/* ==================================================
+          RESPONSIVE BACKGROUND SYMBOL PATTERN (bg1.png)
+      ================================================== */}
+      <div 
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          z-0
+          opacity-20
+          mix-blend-multiply
+          bg-repeat
+          bg-center
+          bg-[length:140px_auto]
+          sm:bg-[length:220px_auto]
+          md:bg-[length:360px_auto]
+          lg:bg-[length:500px_auto]
+        "
+        style={{
+          backgroundImage: "url('/images/bg1.png')",
+        }}
+      />
+
+      <div className="relative z-10 mx-auto max-w-6xl">
 
         {/* ==================================================
             SECTION HEADER

@@ -8,8 +8,10 @@ import LogoStrip from "./components/LogoStrip";
 import Features from "./components/Features";
 import HowItWorks from "./components/HowItWorks";
 import Explore from "./components/Explore";
+import Location from "./components/Location";
 import CTA from "./components/CTA";
 import Footer from "./components/Footer";
+
 
 export default function Home() {
   useEffect(() => {
@@ -35,51 +37,28 @@ export default function Home() {
 
   return (
     <main>
-      {/* ==========================================
-          NAVBAR
-      ========================================== */}
 
       <Navbar />
 
-      {/* ==========================================
-          HERO
-      ========================================== */}
 
       <Hero />
 
-      {/* ==========================================
-          LOGO STRIP
-      ========================================== */}
 
       <LogoStrip />
 
-      {/* ==========================================
-          FEATURES
-      ========================================== */}
 
       <Features />
 
-      {/* ==========================================
-          HOW IT WORKS
-      ========================================== */}
 
       <HowItWorks />
 
-      {/* ==========================================
-          EXPLORE
-      ========================================== */}
 
       <Explore />
 
-      {/* ==========================================
-          DOWNLOAD CTA
-      ========================================== */}
+
+      <Location />
 
       <CTA />
-
-      {/* ==========================================
-          FOOTER
-      ========================================== */}
 
       <Footer />
     </main>

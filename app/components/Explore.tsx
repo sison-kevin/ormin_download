@@ -37,7 +37,9 @@ export default function Explore() {
     <section
       id="explore"
       className="
+        relative
         w-full
+        max-w-full
         overflow-hidden
         bg-[#F9F6F0]
         px-5
@@ -49,8 +51,33 @@ export default function Explore() {
         md:py-32
       "
     >
+      {/* ==================================================
+          RESPONSIVE BACKGROUND SYMBOL PATTERN (bg1.png)
+      ================================================== */}
+      <div 
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          z-0
+          opacity-20
+          mix-blend-multiply
+          bg-repeat
+          bg-center
+          bg-[length:140px_auto]
+          sm:bg-[length:220px_auto]
+          md:bg-[length:360px_auto]
+          lg:bg-[length:500px_auto]
+        "
+        style={{
+          backgroundImage: "url('/images/bg1.png')",
+        }}
+      />
+
       <div
         className="
+          relative
+          z-10
           mx-auto
           grid
           max-w-6xl

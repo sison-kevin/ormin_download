@@ -125,7 +125,7 @@ export default function Navbar() {
         border-b
         border-[#E2B889]/15
 
-        bg-[#2B1B1E]/70
+        bg-[#2B1B1E]/80
 
         shadow-lg
 
@@ -166,15 +166,10 @@ export default function Navbar() {
             flex
             items-center
             gap-2.5
-            transition-opacity
-            duration-300
-            hover:opacity-90
           "
         >
 
-          {/* ==================================================
-              NAVBAR LOGO
-          ================================================== */}
+          {/* NAVBAR LOGO */}
 
           <Image
             src="/images/logonav.png"
@@ -193,9 +188,7 @@ export default function Navbar() {
             "
           />
 
-          {/* ==================================================
-              BRAND NAME + HANUNOO
-          ================================================== */}
+          {/* BRAND NAME + HANUNOO */}
 
           <div className="flex flex-col justify-center">
 
@@ -248,7 +241,7 @@ export default function Navbar() {
         </Link>
 
         {/* ==================================================
-            DESKTOP NAVIGATION
+            DESKTOP NAVIGATION (UNDERLINE ONLY)
         ================================================== */}
 
         <nav
@@ -263,8 +256,7 @@ export default function Navbar() {
           `}
         >
           {navLinks.map((link) => {
-            const isActive =
-              activeSection === link.id;
+            const isActive = activeSection === link.id;
 
             return (
               <Link
@@ -293,7 +285,7 @@ export default function Navbar() {
               >
                 {link.name}
 
-                {/* Active / Hover Underline */}
+                {/* Underline Indicator Only */}
 
                 <span
                   className={`
@@ -379,13 +371,22 @@ export default function Navbar() {
             items-center
             justify-center
 
-            rounded-md
+            rounded-lg
+            border
+            border-[#E2B889]/20
+
+            bg-[#E2B889]/5
 
             text-[#F3EBDD]
 
-            transition-colors
+            transition-all
+            duration-300
 
+            hover:border-[#E2B889]/50
+            hover:bg-[#E2B889]/15
             hover:text-[#E2B889]
+
+            active:scale-95
 
             md:hidden
           "
@@ -402,7 +403,7 @@ export default function Navbar() {
       </div>
 
       {/* ==================================================
-          MOBILE DROPDOWN MENU
+          MOBILE / TABLET DROPDOWN MENU (ENHANCED HOVER EFFECTS)
       ================================================== */}
 
       <div
@@ -443,20 +444,17 @@ export default function Navbar() {
 
             flex
             flex-col
-            gap-1
+            gap-1.5
 
             px-6
             py-6
           `}
         >
 
-          {/* ==================================================
-              MOBILE NAVIGATION LINKS
-          ================================================== */}
+          {/* MOBILE / TABLET NAVIGATION LINKS */}
 
           {navLinks.map((link) => {
-            const isActive =
-              activeSection === link.id;
+            const isActive = activeSection === link.id;
 
             return (
               <Link
@@ -464,30 +462,45 @@ export default function Navbar() {
                 href={link.href}
                 onClick={() => setIsOpen(false)}
                 className={`
-                  rounded-md
+                  flex
+                  items-center
+                  justify-between
 
+                  rounded-xl
+
+                  px-4
                   py-3
 
                   text-sm
                   font-medium
 
-                  transition-colors
+                  transition-all
+                  duration-200
 
                   ${
                     isActive
-                      ? "text-[#E2B889]"
-                      : "text-[#F3EBDD]/80 hover:text-[#E2B889]"
+                      ? "border border-[#E2B889]/30 bg-[#E2B889]/15 pl-6 text-[#E2B889]"
+                      : "text-[#F3EBDD]/80 hover:bg-[#E2B889]/10 hover:pl-6 hover:text-[#E2B889]"
                   }
                 `}
               >
-                {link.name}
+                <span>{link.name}</span>
+                <span
+                  className={`
+                    h-1.5
+                    w-1.5
+                    rounded-full
+                    bg-[#E2B889]
+                    transition-opacity
+                    duration-200
+                    ${isActive ? "opacity-100" : "opacity-0"}
+                  `}
+                />
               </Link>
             );
           })}
 
-          {/* ==================================================
-              MOBILE CTA
-          ================================================== */}
+          {/* MOBILE CTA */}
 
           <Link
             href="#download"
@@ -495,16 +508,16 @@ export default function Navbar() {
             className={`
               ${inter.className}
 
-              mt-4
+              mt-3
 
               block
               w-full
 
-              rounded-md
+              rounded-xl
 
               bg-[#E2B889]
 
-              py-3
+              py-3.5
 
               text-center
 
@@ -513,7 +526,10 @@ export default function Navbar() {
 
               text-[#2B1B1E]
 
+              shadow-[0_4px_14px_rgba(226,184,137,0.25)]
+
               transition-all
+              duration-300
 
               hover:bg-[#EBD0A8]
 
