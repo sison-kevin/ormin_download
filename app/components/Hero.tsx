@@ -28,6 +28,10 @@ const inter = Inter({
   display: "swap",
 });
 
+/* ==================================================
+   HERO COMPONENT
+================================================== */
+
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
@@ -84,7 +88,9 @@ export default function Hero() {
       if (!isHeroVisible) return;
 
       /*
+       * ==========================================
        * PLAY VIDEO WHILE SCROLLING
+       * ==========================================
        */
 
       if (video.paused) {
@@ -94,7 +100,9 @@ export default function Hero() {
       updateContentAnimation();
 
       /*
+       * ==========================================
        * PAUSE WHEN SCROLLING STOPS
+       * ==========================================
        */
 
       if (scrollTimeout.current) {
@@ -180,7 +188,9 @@ export default function Hero() {
           "
         />
 
-        {/* Warm heritage tint */}
+        {/* ==================================================
+            WARM HERITAGE TINT
+            ================================================== */}
 
         <div
           className="
@@ -224,68 +234,69 @@ export default function Hero() {
                 LABEL
                 ================================================== */}
 
-          <div className="mb-0 leading-none">
-            <span
-              className={`
-                ${notoHanunoo.className}
-                inline-flex
-                items-center
-                justify-center
-                px-5
-                py-2.5
-                text-sm
-                text-[#E2B889]
+            <div className="mb-0 leading-none">
+              <span
+                className={`
+                  ${notoHanunoo.className}
+                  inline-flex
+                  items-center
+                  justify-center
+                  px-5
+                  py-2.5
+                  text-sm
+                  text-[#E2B889]
 
-                sm:text-base
-                md:text-lg
-                lg:text-xl
-                xl:text-xl
+                  sm:text-base
+                  md:text-lg
+                  lg:text-xl
+                  xl:text-xl
+                `}
+              >
+                ᜠᜳᜍᜬᜨᜲᜈ᜔ ᜑᜒᜍᜒᜆᜊᜒ ᜋᜒᜐᜒᜌᜓᜋ᜔
+              </span>
+            </div>
+
+            {/* ==================================================
+                HERO TITLE
+                ================================================== */}
+
+            <h1
+              className={`
+                ${cinzelDecorative.className}
+                text-2xl
+                font-bold
+                leading-[1.15]
+                tracking-normal
+                text-[#F3EBDD]
+                drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)]
+
+                sm:text-4xl
+                md:text-5xl
+                lg:text-6xl
+                xl:text-7xl
               `}
             >
-              ᜠᜳᜍᜬᜨᜲᜈ᜔ ᜑᜒᜍᜒᜆᜊᜒ ᜋᜒᜐᜒᜌᜓᜋ᜔
-            </span>
-          </div>
+              Explore Heritage,
+              <br />
 
-          {/* HERO TITLE */}
+              <span
+                className="
+                  text-[#E2B889]
+                  drop-shadow-[0_4px_15px_rgba(0,0,0,0.5)]
+                "
+              >
+                Culture & History
+              </span>
 
-          <h1
-            className={`
-              ${cinzelDecorative.className}
-              text-2xl
-              font-bold
-              leading-[1.15]
-              tracking-normal
-              text-[#F3EBDD]
-              drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)]
+              <br />
 
-              sm:text-4xl
-              md:text-5xl
-              lg:text-6xl
-              xl:text-7xl
-            `}
-          >
-            Explore Heritage,
-            <br />
-
-            <span
-              className="
-                text-[#E2B889]
-                drop-shadow-[0_4px_15px_rgba(0,0,0,0.5)]
-              "
-            >
-              Culture & History
-            </span>
-
-            <br />
-
-            <span className="text-[#F3EBDD]">
-              Made Simple
-            </span>
-          </h1>
+              <span className="text-[#F3EBDD]">
+                Made Simple
+              </span>
+            </h1>
 
             {/* ==================================================
                 DESCRIPTION
-                INTER
                 ================================================== */}
 
             <p
@@ -323,84 +334,95 @@ export default function Hero() {
                 DOWNLOAD BUTTON
                 ================================================== */}
 
-          <button
-  type="button"
-  className={`
-    ${inter.className}
-    group
-    relative
-
-    mt-16
-    sm:mt-[72px]
-    md:mt-20
-    lg:mt-14
-    xl:mt-16
-
-    inline-flex
-    items-center
-    gap-3
-    overflow-hidden
-    rounded-full
-    bg-[#E2B889]
-    px-7
-    py-3.5
-    text-sm
-    font-semibold
-    text-[#2B1B1E]
-    shadow-[0_10px_30px_rgba(226,184,137,0.25)]
-    transition-all
-    duration-300
-    ease-out
-    hover:-translate-y-1
-    hover:bg-[#EBD0A8]
-    hover:shadow-[0_15px_40px_rgba(226,184,137,0.35)]
-    active:translate-y-0
-    active:scale-95
-  `}
->
-            {/* Shine */}
-            <span
-              className="
-                absolute
-                inset-0
-                -translate-x-full
-                bg-gradient-to-r
-                from-transparent
-                via-white/30
-                to-transparent
-                transition-transform
-                duration-700
-                group-hover:translate-x-full
-              "
-            />
-
-            {/* Download Icon */}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="
+            <a
+              href="/eormin-heritage.apk"
+              download="eormin-heritage.apk"
+              className={`
+                ${inter.className}
+                group
                 relative
-                h-5
-                w-5
-                transition-transform
-                duration-300
-                group-hover:translate-y-0.5
-              "
-            >
-              <path d="M12 3v12" />
-              <path d="m7 10 5 5 5-5" />
-              <path d="M5 21h14" />
-            </svg>
 
-            <span className="relative">
-              Download App
-            </span>
-          </button>
+                mt-16
+                sm:mt-[72px]
+                md:mt-20
+                lg:mt-14
+                xl:mt-16
+
+                inline-flex
+                items-center
+                gap-3
+                overflow-hidden
+                rounded-full
+                bg-[#E2B889]
+                px-7
+                py-3.5
+                text-sm
+                font-semibold
+                text-[#2B1B1E]
+                shadow-[0_10px_30px_rgba(226,184,137,0.25)]
+                transition-all
+                duration-300
+                ease-out
+                hover:-translate-y-1
+                hover:bg-[#EBD0A8]
+                hover:shadow-[0_15px_40px_rgba(226,184,137,0.35)]
+                active:translate-y-0
+                active:scale-95
+              `}
+            >
+              {/* ==================================================
+                  SHINE EFFECT
+                  ================================================== */}
+
+              <span
+                className="
+                  absolute
+                  inset-0
+                  -translate-x-full
+                  bg-gradient-to-r
+                  from-transparent
+                  via-white/30
+                  to-transparent
+                  transition-transform
+                  duration-700
+                  group-hover:translate-x-full
+                "
+              />
+
+              {/* ==================================================
+                  DOWNLOAD ICON
+                  ================================================== */}
+
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="
+                  relative
+                  h-5
+                  w-5
+                  transition-transform
+                  duration-300
+                  group-hover:translate-y-0.5
+                "
+              >
+                <path d="M12 3v12" />
+                <path d="m7 10 5 5 5-5" />
+                <path d="M5 21h14" />
+              </svg>
+
+              {/* ==================================================
+                  BUTTON TEXT
+                  ================================================== */}
+
+              <span className="relative">
+                Download App
+              </span>
+            </a>
 
             {/* ==================================================
                 FEATURES

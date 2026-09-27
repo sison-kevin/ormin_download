@@ -119,7 +119,6 @@ export default function CTA() {
         bg-[#F9F6F0]
       "
     >
-
       {/* ==================================================
           CTA BACKGROUND
       ================================================== */}
@@ -145,7 +144,6 @@ export default function CTA() {
           ${visible ? "opacity-100" : "opacity-0"}
         `}
       >
-
         {/* ==================================================
             BACKGROUND GLOW
         ================================================== */}
@@ -292,7 +290,6 @@ export default function CTA() {
               }
             `}
           >
-
             {/* ==================================================
                 HANUNOO LABEL
             ================================================== */}
@@ -372,8 +369,9 @@ export default function CTA() {
             ================================================== */}
 
             <div className="mt-7">
-              <button
-                type="button"
+              <a
+                href="/eormin-heritage.apk"
+                download="eormin-heritage.apk"
                 className={`
                   ${inter.className}
                   group
@@ -406,8 +404,9 @@ export default function CTA() {
                   sm:text-sm
                 `}
               >
-
-                {/* Shine */}
+                {/* ==================================================
+                    SHINE
+                ================================================== */}
 
                 <span
                   className="
@@ -424,7 +423,9 @@ export default function CTA() {
                   "
                 />
 
-                {/* Download Icon */}
+                {/* ==================================================
+                    DOWNLOAD ICON
+                ================================================== */}
 
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -448,12 +449,14 @@ export default function CTA() {
                   <path d="M5 21h14" />
                 </svg>
 
-                {/* Text */}
+                {/* ==================================================
+                    TEXT
+                ================================================== */}
 
                 <span className="relative">
                   Download App
                 </span>
-              </button>
+              </a>
             </div>
 
             {/* ==================================================
@@ -483,7 +486,6 @@ export default function CTA() {
               <span className="text-[#E2B889]/50">•</span>
               <span>Reservations</span>
             </div>
-
           </div>
         </div>
       </div>
