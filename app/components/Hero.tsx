@@ -335,7 +335,7 @@ export default function Hero() {
                 ================================================== */}
 
             <a
-              href="/eormin-heritage.apk"
+              href="https://github.com/sison-kevin/ormin_download/releases/download/v1.0.0/eormin-heritage.apk"
               download="eormin-heritage.apk"
               className={`
                 ${inter.className}

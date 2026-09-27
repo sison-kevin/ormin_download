@@ -370,8 +370,8 @@ export default function CTA() {
 
             <div className="mt-7">
               <a
-                href="/eormin-heritage.apk"
-                download="eormin-heritage.apk"
+                 href="https://github.com/sison-kevin/ormin_download/releases/download/v1.0.0/eormin-heritage.apk"
+                  download
                 className={`
                   ${inter.className}
                   group
