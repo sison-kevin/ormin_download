@@ -39,10 +39,6 @@ const items = [
     hanunoo: "ᜑᜒᜇᜒᜆᜌ᜔ ᜆᜓᜇ᜔ᜐ᜔",
     english: "Heritage Tours",
   },
-  {
-    hanunoo: "ᜁᜈ᜔ᜆᜒᜇᜀᜃ᜔ᜆᜒᜊ᜔ ᜋᜉ᜔",
-    english: "Interactive Map",
-  },
 ];
 
 export default function LogoStrip() {

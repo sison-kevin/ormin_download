@@ -480,8 +480,6 @@ export default function CTA() {
             >
               <span>AR Experience</span>
               <span className="text-[#E2B889]/50">•</span>
-              <span>Navigation</span>
-              <span className="text-[#E2B889]/50">•</span>
               <span>Games</span>
               <span className="text-[#E2B889]/50">•</span>
               <span>Reservations</span>

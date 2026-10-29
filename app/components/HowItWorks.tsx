@@ -58,10 +58,10 @@ const steps = [
   },
   {
     number: "04",
-    title: "Navigate & Play",
-    hanunoo: "ᜈᜊᜒᜄᜐᜌ᜔ ᜀᜈ᜔ ᜉᜎᜒ",
+    title: "Play & Learn",
+    hanunoo: "ᜉᜎᜒ ᜀᜈ᜔ ᜎᜒᜇᜈ᜔",
     description:
-      "Use AR navigation to explore the museum and enjoy interactive games that make learning about heritage more engaging.",
+      "Enjoy interactive games that make learning about heritage more engaging.",
     image: "/images/how-game.png",
   },
   {

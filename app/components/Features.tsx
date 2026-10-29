@@ -43,16 +43,6 @@ const features = [
 
   {
     number: "02",
-    title: "AR Navigation",
-    hanunoo: "ᜀᜇ᜔ ᜈᜊᜒᜄᜐᜌ᜔",
-    description:
-      "Find your way around the museum with augmented reality navigation. Locate artifacts and important areas while exploring the museum.",
-    image: "/images/feature-navigation.jpg",
-    buttonText: "Start Navigation",
-  },
-
-  {
-    number: "03",
     title: "Interactive Games",
     hanunoo: "ᜁᜈ᜔ᜆᜒᜇᜀᜃ᜔ᜆᜒᜊ᜔ ᜄᜒᜋ᜔",
     description:
@@ -62,7 +52,7 @@ const features = [
   },
 
   {
-    number: "04",
+    number: "03",
     title: "Reservation",
     hanunoo: "ᜇᜒᜐᜒᜇ᜔ᜊᜐᜌ᜔",
     description:
